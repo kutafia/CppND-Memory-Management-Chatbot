@@ -2,6 +2,7 @@
 #include <random>
 #include <algorithm>
 #include <ctime>
+#include <wx/bitmap.h>
 
 #include "chatlogic.h"
 #include "graphnode.h"
@@ -44,6 +45,52 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+ChatBot::ChatBot& operator=(const ChatBot& other)
+{            
+    std::cout << "ChatBot Copy Assignment Operator" << std::endl;
+
+    _image = (wxBitmap *)malloc(sizeof(wxBitmap));
+    _chatLogic = (ChatLogic *)malloc(sizeof(ChatLogic));
+    _rootNode = (GraphNode *)malloc(sizeof(GraphNode));
+
+    *_image = *other._image;
+    *_chatLogic = *other._chatLogic;
+    *_rootNode = *other._rootNode;
+    return *this;
+}  
+
+ChatBot::ChatBot(ChatBot&& other)
+{
+    std::cout << "ChatBot Move Operator" << std::endl;
+
+    _image = other._image;
+    _chatLogic = other._chatLogic;
+    _rootNode = other._rootNode;
+
+    other._image = nullptr;
+    other._chatLogic = nullptr;
+    other._rootNode = nullptr;
+}
+
+ChatBot::ChatBot& operator=(ChatBot&& other)
+{
+    std::cout << "ChatBot Move Assignment Operator" << std::endl;
+
+    if (this != &other) {
+        delete[] _image;
+        delete[] _chatLogic;
+        delete[] _rootNode;
+
+        _image = other._image;
+        _chatLogic = other._chatLogic;
+        _rootNode = other._rootNode;
+
+        other._image = nullptr;
+        other._chatLogic = nullptr;
+        other._rootNode = nullptr;
+    }
+    return *this;
+}
 
 ////
 //// EOF STUDENT CODE

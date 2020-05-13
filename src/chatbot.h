@@ -28,8 +28,9 @@ public:
     ~ChatBot();
 
     //// STUDENT CODE
-    ////
-
+    ChatBot& operator=(const ChatBot&);          // copy assignment operator
+    ChatBot(ChatBot &&);                         // move constructor
+    ChatBot & ChatBot :: operator= (ChatBot &&); // move assignment operator
     ////
     //// EOF STUDENT CODE
 
