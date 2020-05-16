@@ -38,13 +38,17 @@ ChatLogic::~ChatLogic()
     // delete all nodes
     for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
     {
+      if(*it!= NULL) {
         delete *it;
+      }
     }
 
     // delete all edges
     for (auto it = std::begin(_edges); it != std::end(_edges); ++it)
     {
+      if(*it!= NULL){
         delete *it;
+      }
     }
 
     ////

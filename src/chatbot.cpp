@@ -45,7 +45,7 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
-ChatBot::ChatBot& operator=(const ChatBot& other)
+ChatBot& ChatBot::operator=(const ChatBot& other)
 {            
     std::cout << "ChatBot Copy Assignment Operator" << std::endl;
 
@@ -72,7 +72,7 @@ ChatBot::ChatBot(ChatBot&& other)
     other._rootNode = nullptr;
 }
 
-ChatBot::ChatBot& operator=(ChatBot&& other)
+ChatBot& ChatBot::operator=(ChatBot&& other)
 {
     std::cout << "ChatBot Move Assignment Operator" << std::endl;
 
