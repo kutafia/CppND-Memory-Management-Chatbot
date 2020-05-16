@@ -45,17 +45,25 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+ChatBot::ChatBot(const ChatBot& other)
+{
+    _image = new wxBitmap(*other._image);
+    _chatLogic = other._chatLogic;
+    _rootNode = other._rootNode;
+}
+
 ChatBot& ChatBot::operator=(const ChatBot& other)
 {            
     std::cout << "ChatBot Copy Assignment Operator" << std::endl;
 
-    _image = (wxBitmap *)malloc(sizeof(wxBitmap));
-    _chatLogic = (ChatLogic *)malloc(sizeof(ChatLogic));
-    _rootNode = (GraphNode *)malloc(sizeof(GraphNode));
+  if (this != &other)
+  {
+    delete _image;
 
-    *_image = *other._image;
-    *_chatLogic = *other._chatLogic;
-    *_rootNode = *other._rootNode;
+    _image = new wxBitmap(*other._image);
+    _chatLogic = other._chatLogic;
+    _rootNode = other._rootNode;
+  }
     return *this;
 }  
 
@@ -77,9 +85,9 @@ ChatBot& ChatBot::operator=(ChatBot&& other)
     std::cout << "ChatBot Move Assignment Operator" << std::endl;
 
     if (this != &other) {
-        delete[] _image;
-        delete[] _chatLogic;
-        delete[] _rootNode;
+        delete _image;
+        //delete[] _chatLogic;
+        //delete[] _rootNode;
 
         _image = other._image;
         _chatLogic = other._chatLogic;
