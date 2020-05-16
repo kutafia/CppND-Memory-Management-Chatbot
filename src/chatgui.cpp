@@ -2,6 +2,7 @@
 #include <wx/colour.h>
 #include <wx/image.h>
 #include <string>
+#include <memory>
 #include "chatbot.h"
 #include "chatlogic.h"
 #include "chatgui.h"
@@ -118,7 +119,7 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     ////
 
     // create chat logic instance
-    _chatLogic = make_unique<ChatLogic>(new ChatLogic()); 
+    _chatLogic = std::make_unique<ChatLogic>(); 
 
     // pass pointer to chatbot dialog so answers can be displayed in GUI
     _chatLogic->SetPanelDialogHandle(this);
@@ -148,8 +149,8 @@ void ChatBotPanelDialog::AddDialogItem(wxString text, bool isFromUser)
     _dialogSizer->Add(item, 0, wxALL | (isFromUser == true ? wxALIGN_LEFT : wxALIGN_RIGHT), 8);
     _dialogSizer->Layout();
 
-    // make scrollbar show up
-    this->FitInside(); // ask the sizer about the needed size
+    // make  scrollbar show up
+   this->FitInside(); // ask the sizer about the needed size
     this->SetScrollRate(5, 5);
     this->Layout();
 
