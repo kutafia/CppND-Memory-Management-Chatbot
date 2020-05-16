@@ -87,30 +87,13 @@ ChatBot& ChatBot::operator=(ChatBot&& other)
     if (this != &other) {
         _image = new wxBitmap(*other._image);
         _chatLogic = other._chatLogic;
-        //_chatLogic->SetChatbotHandle(this); /// ??
+        _chatLogic->SetChatbotHandle(this); 
         _rootNode = other._rootNode;
 
         other._image = nullptr;
         other._chatLogic = nullptr;
     }
     return *this;
-}
-
-ChatBot &ChatBot::operator=(ChatBot &&src) {
-  std::cout << "ChatBot Move Assignment Operator" << std::endl;
-
-  if ( this != &src ) {
-    _image = new wxBitmap();
-    *_image = *src._image;
-
-    _chatLogic = src._chatLogic;
-    _chatLogic->SetChatbotHandle(this);
-
-    _rootNode = src._rootNode;
-    src._image = nullptr;
-    src._chatLogic = nullptr;
-  }
-  return *this;
 }
 
 ////
